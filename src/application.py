@@ -13,9 +13,11 @@ channel_list = ["Movies", "Music"]
 messages = defaultdict(list)
 private_key = {}
 
+
 @app.route("/")
 def index():
-    return render_template("index.html", channel_list=channel_list, messages=messages)
+    return render_template("index.html", channel_list=channel_list)
+
 
 @app.route("/channels/<string:channel>")
 def channels(channel):
@@ -23,10 +25,11 @@ def channels(channel):
     # Make sure the channel exists
     if channel in channel_list:
         channel = channel
-        message =messages[channel]
+        message = messages[channel]
         return render_template("channel.html", channel_list=channel_list, channel=channel, message=message)
     else:
         return redirect(url_for("index"))
+
 
 @app.route("/create_channel", methods=["POST"])
 def create_channel():
@@ -40,6 +43,7 @@ def create_channel():
         print(channel_list)
         return jsonify({"success": True})
 
+
 @socketio.on('join')
 def on_join(data):
     username = data['username']
@@ -47,12 +51,14 @@ def on_join(data):
     join_room(room)
     send(f'{username} has entered the {room} channel.', room=room)
 
+
 @socketio.on('leave')
 def on_leave(data):
     username = data['username']
     room = data['room']
     leave_room(room)
     send(f'{username} has left the {room} channel.', room=room)
+
 
 @socketio.on("send message")
 def message(data):
@@ -69,12 +75,14 @@ def message(data):
     if len(messages[room]) > 100:
         messages[room].pop(0)
 
-    emit("broadcast message",  {"username": username, "time":time, "message": message}, room=room)
+    emit("broadcast message",  {"username": username, "time": time, "message": message}, room=room)
+
 
 @socketio.on("private key", namespace='/private')
 def key(key):
     private_key[key] = request.sid
     print(f'Key added:{key} {private_key[key]}')
+
 
 @socketio.on("private message", namespace='/private')
 def private_message(data):
@@ -87,4 +95,4 @@ def private_message(data):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
