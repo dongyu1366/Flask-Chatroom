@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block main %}
+<div class="row-inline">
+    <input type="text" class="form-control" id="private-key" placeholder="My private key">
+    <button class="btn btn-primary mb-2" id="btn-key">Confirm</button>
+</div>
+<div class="row-inline">
+    <input type="text" class="form-control" id="key-send" placeholder="Friend' s key">
+    <input type="text" class="form-control" id="private-message-send" placeholder="Message">
+    <button class="btn btn-primary mb-2" id="btn-private-send">Send</button>
+</div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<script src="{{ url_for('static', filename='js/channel.js') }}"></script>
+{% endblock %}
+
+{% block title %}Chat room{% endblock %}
+
+{% block main %}
+<div class="message">
+    <div id=channel-name><h4>{{ channel }}</h4></div>
+    <hr>
+    <div id="message-area">
+        {% for msg in message %}
+        <div class="message-block">
+            <span>{{ msg.username }}</span>
+            <span class="time">{{ msg.time }}</span>
+            <hr class=message-innerline>
+            <p>{{ msg.message }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row-inline" id="message-input">
+        <textarea class="form-control" id="input-msg" rows="3"></textarea>
+        <button id="submit-btn" type="submit" disabled>submit</button>
+    </div>
+</div>
+{% endblock %}

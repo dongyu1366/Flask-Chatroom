@@ -1,0 +1,52 @@
+body {
+    height: 100vh;
+}
+
+.flex {
+    display: flex;
+    width: auto;
+    height: auto;
+    min-height: 85%;
+}
+
+#sidebar {
+    background-color: rgb(233, 204, 170);
+    height: auto;
+    min-height: calc(100vh - 60px);
+}
+
+#main {
+    background-color: rgb(221, 213, 210);
+}
+
+#message-area {
+    height: auto;
+    overflow-y: auto;
+}
+
+.typemessage {
+    display: flex;
+    width: 100%;
+}
+
+.row-inline {
+    display: flex;
+}
+
+.time {
+    float: right;
+    color: rgb(58, 55, 55);
+    font-size: 12px;
+}
+
+.message-block {
+    background-color: rgb(219, 166, 51);
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 5px;
+}
+
+.message-innerline {
+    margin-top: 2px;
+    margin-bottom: 5px;
+}
